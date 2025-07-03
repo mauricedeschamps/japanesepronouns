@@ -2,17 +2,21 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本語人称代名詞発音ガイド</title>
-    <meta name="description" content="日本語の人称代名詞の発音を学ぶ">
-    <meta name="theme-color" content="#121212">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#dc3545">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Japanese Personal Pronoun</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22skyblue%22/><text y=%22.9em%22 font-size=%2290%22>私</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22skyblue%22/><text y=%22.9em%22 font-size=%2290%22>私</text></svg>">
     <link rel="manifest" href="manifest.json">
     <style>
         :root {
             --bg-color: #121212;
             --text-color: #e0e0e0;
-            --primary-color: #bb86fc;
-            --secondary-color: #3700b3;
+            --primary-color: #dc3545;
+            --secondary-color: #6c757d;
             --card-bg: #1e1e1e;
             --hover-color: #4a148c;
             --active-color: #7b1fa2;
@@ -25,6 +29,7 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .container {
@@ -69,6 +74,7 @@
             cursor: pointer;
             transition: all 0.2s;
             min-width: 80px;
+            user-select: none;
         }
         
         .pronoun-item:hover {
@@ -100,6 +106,7 @@
             cursor: pointer;
             margin-top: 10px;
             font-weight: bold;
+            transition: opacity 0.2s;
         }
         
         .play-all:hover {
@@ -140,7 +147,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Japanese Personal Pronouns</h1>
+        <h1>日本語人称代名詞発音ガイド</h1>
         
         <!-- 私 / I -->
         <div class="pronoun-card">
@@ -451,15 +458,13 @@
                 const utterance = new SpeechSynthesisUtterance();
                 utterance.text = japaneseText;
                 utterance.lang = 'ja-JP';
-                utterance.rate = 0.9;  // 少しゆっくりめ
-                utterance.pitch = 1.0; // 標準的な高さ
+                utterance.rate = 0.9;
+                utterance.pitch = 1.0;
                 
-                // 日本語音声を探す
                 const voices = window.speechSynthesis.getVoices();
                 let japaneseVoice = voices.find(voice => 
                     voice.lang === 'ja-JP' || voice.lang.startsWith('ja'));
                 
-                // 日本語音声が見つからない場合、デフォルトを使用
                 if (!japaneseVoice && voices.length > 0) {
                     japaneseVoice = voices[0];
                 }
@@ -468,11 +473,9 @@
                     utterance.voice = japaneseVoice;
                 }
                 
-                // 再生前に現在の音声をキャンセル
                 window.speechSynthesis.cancel();
                 window.speechSynthesis.speak(utterance);
                 
-                // クリックした要素に視覚的フィードバック
                 const element = event.currentTarget;
                 element.style.transform = 'scale(0.95)';
                 element.style.backgroundColor = '#7b1fa2';
@@ -492,28 +495,43 @@
             function playNext() {
                 if (index >= pronunciations.length) return;
                 
-                speakJapanese(pronunciations[index]);
+                const utterance = new SpeechSynthesisUtterance(pronunciations[index]);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.9;
+                
+                const voices = window.speechSynthesis.getVoices();
+                const japaneseVoice = voices.find(voice => 
+                    voice.lang === 'ja-JP' || voice.lang.startsWith('ja'));
+                
+                if (japaneseVoice) {
+                    utterance.voice = japaneseVoice;
+                }
+                
+                window.speechSynthesis.speak(utterance);
                 index++;
                 
-                // 1秒間隔で次の発音を再生
-                setTimeout(playNext, 1000);
+                utterance.onend = function() {
+                    setTimeout(playNext, 300);
+                };
             }
             
+            window.speechSynthesis.cancel();
             playNext();
         }
         
         // 音声リストを初期化
-        window.speechSynthesis.onvoiceschanged = function() {
-            const voices = window.speechSynthesis.getVoices();
-            console.log('利用可能な音声:', voices);
-        };
-        
-        // ブラウザによっては音声が最初からロードされないため、明示的に取得
-        if (window.speechSynthesis.getVoices().length === 0) {
-            window.speechSynthesis.addEventListener('voiceschanged', function() {
+        if (window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = function() {
                 const voices = window.speechSynthesis.getVoices();
-                console.log('音声がロードされました:', voices);
-            });
+                console.log('利用可能な音声:', voices);
+            };
+            
+            if (window.speechSynthesis.getVoices().length === 0) {
+                window.speechSynthesis.addEventListener('voiceschanged', function() {
+                    const voices = window.speechSynthesis.getVoices();
+                    console.log('音声がロードされました:', voices);
+                });
+            }
         }
         
         // PWA用サービスワーカー登録
