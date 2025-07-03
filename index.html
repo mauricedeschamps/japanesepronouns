@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Personal Pronouns with Audio</title>
+    <meta name="description" content="List of Japanese personal pronouns with audio pronunciation">
+    <meta name="theme-color" content="#121212">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --primary-color: #bb86fc;
+            --secondary-color: #3700b3;
+            --card-bg: #1e1e1e;
+            --hover-color: #4a148c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .pronoun-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pronoun-category {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .pronoun-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .pronoun-item {
+            background-color: var(--secondary-color);
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .pronoun-item:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .japanese {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .romaji {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .pronoun-list {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Japanese Personal Pronouns with Audio</h1>
+        
+        <div class="pronoun-card">
+            <div class="pronoun-category">I / Me</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speak('watashi')">
+                    <span class="japanese">私</span>
+                    <span class="romaji">watashi</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('watakushi')">
+                    <span class="japanese">私</span>
+                    <span class="romaji">watakushi</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('boku')">
+                    <span class="japanese">僕</span>
+                    <span class="romaji">boku</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('ore')">
+                    <span class="japanese">俺</span>
+                    <span class="romaji">ore</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('atashi')">
+                    <span class="japanese">あたし</span>
+                    <span class="romaji">atashi</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('washi')">
+                    <span class="japanese">わし</span>
+                    <span class="romaji">washi</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('ware')">
+                    <span class="japanese">我</span>
+                    <span class="romaji">ware</span>
+                </div>
+                <div class="pronoun-item" onclick="speak('uchi')">
+                    <span class="japanese">うち</span>
+                    <span class="romaji">uchi</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Other pronoun categories follow the same pattern -->
+        <!-- [Previous pronoun cards with onclick handlers...] -->
+        
+        <footer>
+            <p>Contact me<br>
+            <a href="mailto:mementomorikatsu@gmail.com">mementomorikatsu@gmail.com</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Speech synthesis function
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance();
+                utterance.text = text;
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.9;
+                
+                // Try to find a Japanese voice
+                const voices = window.speechSynthesis.getVoices();
+                const japaneseVoice = voices.find(voice => 
+                    voice.lang === 'ja-JP' || voice.lang === 'ja');
+                
+                if (japaneseVoice) {
+                    utterance.voice = japaneseVoice;
+                }
+                
+                // Speak the text
+                window.speechSynthesis.cancel(); // Cancel any ongoing speech
+                window.speechSynthesis.speak(utterance);
+                
+                // Visual feedback
+                const element = event.currentTarget;
+                element.style.transform = 'scale(0.95)';
+                element.style.backgroundColor = '#4a148c';
+                setTimeout(() => {
+                    element.style.transform = 'scale(1)';
+                    element.style.backgroundColor = '';
+                }, 200);
+            } else {
+                alert('Text-to-speech is not supported in your browser');
+            }
+        }
+
+        // Load voices when they become available
+        window.speechSynthesis.onvoiceschanged = function() {
+            const voices = window.speechSynthesis.getVoices();
+            console.log('Voices loaded:', voices);
+        };
+
+        // Initialize voices (some browsers need this)
+        if (window.speechSynthesis.getVoices().length === 0) {
+            window.speechSynthesis.addEventListener('voiceschanged', function() {
+                const voices = window.speechSynthesis.getVoices();
+                console.log('Voices loaded after event:', voices);
+            });
+        }
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+    </script>
+</body>
+</html>
