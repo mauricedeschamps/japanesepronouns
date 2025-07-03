@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japanese Personal Pronouns with Audio</title>
-    <meta name="description" content="List of Japanese personal pronouns with audio pronunciation">
+    <title>日本語人称代名詞発音ガイド</title>
+    <meta name="description" content="日本語の人称代名詞の発音を学ぶ">
     <meta name="theme-color" content="#121212">
     <link rel="manifest" href="manifest.json">
     <style>
@@ -15,6 +15,7 @@
             --secondary-color: #3700b3;
             --card-bg: #1e1e1e;
             --hover-color: #4a148c;
+            --active-color: #7b1fa2;
         }
         
         body {
@@ -49,6 +50,7 @@
             color: var(--primary-color);
             margin-bottom: 10px;
             font-weight: bold;
+            font-size: 1.2em;
         }
         
         .pronoun-list {
@@ -59,27 +61,49 @@
         
         .pronoun-item {
             background-color: var(--secondary-color);
-            padding: 8px 12px;
-            border-radius: 4px;
+            padding: 10px 15px;
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            min-width: 80px;
         }
         
         .pronoun-item:hover {
             background-color: var(--hover-color);
         }
         
+        .pronoun-item:active {
+            background-color: var(--active-color);
+            transform: scale(0.95);
+        }
+        
         .japanese {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: bold;
         }
         
         .romaji {
             font-size: 0.9em;
             opacity: 0.8;
+            margin-top: 4px;
+        }
+        
+        .play-all {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .play-all:hover {
+            opacity: 0.9;
         }
         
         footer {
@@ -104,55 +128,315 @@
             }
             
             .pronoun-list {
-                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .pronoun-item {
+                min-width: 70px;
+                padding: 8px 10px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Japanese Personal Pronouns with Audio</h1>
+        <h1>日本語人称代名詞発音ガイド</h1>
         
+        <!-- 私 / I -->
         <div class="pronoun-card">
-            <div class="pronoun-category">I / Me</div>
+            <div class="pronoun-category">私 (I/Me)</div>
             <div class="pronoun-list">
-                <div class="pronoun-item" onclick="speak('watashi')">
+                <div class="pronoun-item" onclick="speakJapanese('わたし')">
                     <span class="japanese">私</span>
                     <span class="romaji">watashi</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('watakushi')">
+                <div class="pronoun-item" onclick="speakJapanese('わたくし')">
                     <span class="japanese">私</span>
                     <span class="romaji">watakushi</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('boku')">
+                <div class="pronoun-item" onclick="speakJapanese('ぼく')">
                     <span class="japanese">僕</span>
                     <span class="romaji">boku</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('ore')">
+                <div class="pronoun-item" onclick="speakJapanese('おれ')">
                     <span class="japanese">俺</span>
                     <span class="romaji">ore</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('atashi')">
+                <div class="pronoun-item" onclick="speakJapanese('あたし')">
                     <span class="japanese">あたし</span>
                     <span class="romaji">atashi</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('washi')">
+                <div class="pronoun-item" onclick="speakJapanese('わし')">
                     <span class="japanese">わし</span>
                     <span class="romaji">washi</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('ware')">
+                <div class="pronoun-item" onclick="speakJapanese('われ')">
                     <span class="japanese">我</span>
                     <span class="romaji">ware</span>
                 </div>
-                <div class="pronoun-item" onclick="speak('uchi')">
+                <div class="pronoun-item" onclick="speakJapanese('うち')">
                     <span class="japanese">うち</span>
                     <span class="romaji">uchi</span>
                 </div>
             </div>
+            <button class="play-all" onclick="playAll(['わたし', 'わたくし', 'ぼく', 'おれ', 'あたし', 'わし', 'われ', 'うち'])">全部再生</button>
         </div>
         
-        <!-- Other pronoun categories follow the same pattern -->
-        <!-- [Previous pronoun cards with onclick handlers...] -->
+        <!-- あなた / You -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">あなた (You)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('あなた')">
+                    <span class="japanese">あなた</span>
+                    <span class="romaji">anata</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('きみ')">
+                    <span class="japanese">君</span>
+                    <span class="romaji">kimi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('おまえ')">
+                    <span class="japanese">お前</span>
+                    <span class="romaji">omae</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あんた')">
+                    <span class="japanese">あんた</span>
+                    <span class="romaji">anta</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('てめえ')">
+                    <span class="japanese">てめえ</span>
+                    <span class="romaji">temee</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('きさま')">
+                    <span class="japanese">貴様</span>
+                    <span class="romaji">kisama</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('おたく')">
+                    <span class="japanese">お宅</span>
+                    <span class="romaji">otaku</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('じぶん')">
+                    <span class="japanese">自分</span>
+                    <span class="romaji">jibun</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['あなた', 'きみ', 'おまえ', 'あんた', 'てめえ', 'きさま', 'おたく', 'じぶん'])">全部再生</button>
+        </div>
+        
+        <!-- 彼 / He -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">彼 (He/Him)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('かれ')">
+                    <span class="japanese">彼</span>
+                    <span class="romaji">kare</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのひと')">
+                    <span class="japanese">あの人</span>
+                    <span class="romaji">ano hito</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのかた')">
+                    <span class="japanese">あの方</span>
+                    <span class="romaji">ano kata</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('こいつ')">
+                    <span class="japanese">こいつ</span>
+                    <span class="romaji">koitsu</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('そいつ')">
+                    <span class="japanese">そいつ</span>
+                    <span class="romaji">soitsu</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あいつ')">
+                    <span class="japanese">あいつ</span>
+                    <span class="romaji">aitsu</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('やつ')">
+                    <span class="japanese">やつ</span>
+                    <span class="romaji">yatsu</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['かれ', 'あのひと', 'あのかた', 'こいつ', 'そいつ', 'あいつ', 'やつ'])">全部再生</button>
+        </div>
+        
+        <!-- 彼女 / She -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">彼女 (She/Her)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('かのじょ')">
+                    <span class="japanese">彼女</span>
+                    <span class="romaji">kanojo</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのひと')">
+                    <span class="japanese">あの人</span>
+                    <span class="romaji">ano hito</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのかた')">
+                    <span class="japanese">あの方</span>
+                    <span class="romaji">ano kata</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('こいつ')">
+                    <span class="japanese">こいつ</span>
+                    <span class="romaji">koitsu</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('そいつ')">
+                    <span class="japanese">そいつ</span>
+                    <span class="romaji">soitsu</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あいつ')">
+                    <span class="japanese">あいつ</span>
+                    <span class="romaji">aitsu</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('やつ')">
+                    <span class="japanese">やつ</span>
+                    <span class="romaji">yatsu</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['かのじょ', 'あのひと', 'あのかた', 'こいつ', 'そいつ', 'あいつ', 'やつ'])">全部再生</button>
+        </div>
+        
+        <!-- 私たち / We -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">私たち (We/Us)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('わたしたち')">
+                    <span class="japanese">私たち</span>
+                    <span class="romaji">watashitachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('われわれ')">
+                    <span class="japanese">我々</span>
+                    <span class="romaji">wareware</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('ぼくたち')">
+                    <span class="japanese">僕たち</span>
+                    <span class="romaji">bokutachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('おれたち')">
+                    <span class="japanese">俺たち</span>
+                    <span class="romaji">oretachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あたしたち')">
+                    <span class="japanese">あたしたち</span>
+                    <span class="romaji">atashitachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('わたくしども')">
+                    <span class="japanese">私ども</span>
+                    <span class="romaji">watakushidomo</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('こちら')">
+                    <span class="japanese">こちら</span>
+                    <span class="romaji">kochira</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['わたしたち', 'われわれ', 'ぼくたち', 'おれたち', 'あたしたち', 'わたくしども', 'こちら'])">全部再生</button>
+        </div>
+        
+        <!-- あなたたち / You (plural) -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">あなたたち (You all)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('あなたたち')">
+                    <span class="japanese">あなたたち</span>
+                    <span class="romaji">anatatachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('きみたち')">
+                    <span class="japanese">君たち</span>
+                    <span class="romaji">kimitachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('おまえたち')">
+                    <span class="japanese">お前たち</span>
+                    <span class="romaji">omaetachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あんたたち')">
+                    <span class="japanese">あんたたち</span>
+                    <span class="romaji">antatachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あなたがた')">
+                    <span class="japanese">あなたがた</span>
+                    <span class="romaji">anatagata</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('おたくたち')">
+                    <span class="japanese">お宅たち</span>
+                    <span class="romaji">otakutachi</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['あなたたち', 'きみたち', 'おまえたち', 'あんたたち', 'あなたがた', 'おたくたち'])">全部再生</button>
+        </div>
+        
+        <!-- 彼ら / They (male) -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">彼ら (They - male/mixed)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('かれら')">
+                    <span class="japanese">彼ら</span>
+                    <span class="romaji">karera</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのひとたち')">
+                    <span class="japanese">あの人たち</span>
+                    <span class="romaji">ano hitotachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのかたたち')">
+                    <span class="japanese">あの方たち</span>
+                    <span class="romaji">ano katatachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('こいつら')">
+                    <span class="japanese">こいつら</span>
+                    <span class="romaji">koitsura</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('そいつら')">
+                    <span class="japanese">そいつら</span>
+                    <span class="romaji">soitsura</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あいつら')">
+                    <span class="japanese">あいつら</span>
+                    <span class="romaji">aitsura</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('やつら')">
+                    <span class="japanese">やつら</span>
+                    <span class="romaji">yatsura</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['かれら', 'あのひとたち', 'あのかたたち', 'こいつら', 'そいつら', 'あいつら', 'やつら'])">全部再生</button>
+        </div>
+        
+        <!-- 彼女ら / They (female) -->
+        <div class="pronoun-card">
+            <div class="pronoun-category">彼女ら (They - female)</div>
+            <div class="pronoun-list">
+                <div class="pronoun-item" onclick="speakJapanese('かのじょら')">
+                    <span class="japanese">彼女ら</span>
+                    <span class="romaji">kanojora</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('かのじょたち')">
+                    <span class="japanese">彼女たち</span>
+                    <span class="romaji">kanojotachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのひとたち')">
+                    <span class="japanese">あの人たち</span>
+                    <span class="romaji">ano hitotachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あのかたたち')">
+                    <span class="japanese">あの方たち</span>
+                    <span class="romaji">ano katatachi</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('こいつら')">
+                    <span class="japanese">こいつら</span>
+                    <span class="romaji">koitsura</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('そいつら')">
+                    <span class="japanese">そいつら</span>
+                    <span class="romaji">soitsura</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('あいつら')">
+                    <span class="japanese">あいつら</span>
+                    <span class="romaji">aitsura</span>
+                </div>
+                <div class="pronoun-item" onclick="speakJapanese('やつら')">
+                    <span class="japanese">やつら</span>
+                    <span class="romaji">yatsura</span>
+                </div>
+            </div>
+            <button class="play-all" onclick="playAll(['かのじょら', 'かのじょたち', 'あのひとたち', 'あのかたたち', 'こいつら', 'そいつら', 'あいつら', 'やつら'])">全部再生</button>
+        </div>
         
         <footer>
             <p>Contact me<br>
@@ -161,66 +445,89 @@
     </div>
 
     <script>
-        // Speech synthesis function
-        function speak(text) {
+        // 日本語発音用の関数
+        function speakJapanese(japaneseText) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance();
-                utterance.text = text;
+                utterance.text = japaneseText;
                 utterance.lang = 'ja-JP';
-                utterance.rate = 0.9;
+                utterance.rate = 0.9;  // 少しゆっくりめ
+                utterance.pitch = 1.0; // 標準的な高さ
                 
-                // Try to find a Japanese voice
+                // 日本語音声を探す
                 const voices = window.speechSynthesis.getVoices();
-                const japaneseVoice = voices.find(voice => 
-                    voice.lang === 'ja-JP' || voice.lang === 'ja');
+                let japaneseVoice = voices.find(voice => 
+                    voice.lang === 'ja-JP' || voice.lang.startsWith('ja'));
+                
+                // 日本語音声が見つからない場合、デフォルトを使用
+                if (!japaneseVoice && voices.length > 0) {
+                    japaneseVoice = voices[0];
+                }
                 
                 if (japaneseVoice) {
                     utterance.voice = japaneseVoice;
                 }
                 
-                // Speak the text
-                window.speechSynthesis.cancel(); // Cancel any ongoing speech
+                // 再生前に現在の音声をキャンセル
+                window.speechSynthesis.cancel();
                 window.speechSynthesis.speak(utterance);
                 
-                // Visual feedback
+                // クリックした要素に視覚的フィードバック
                 const element = event.currentTarget;
                 element.style.transform = 'scale(0.95)';
-                element.style.backgroundColor = '#4a148c';
+                element.style.backgroundColor = '#7b1fa2';
                 setTimeout(() => {
                     element.style.transform = 'scale(1)';
                     element.style.backgroundColor = '';
                 }, 200);
             } else {
-                alert('Text-to-speech is not supported in your browser');
+                alert('お使いのブラウザは音声合成をサポートしていません');
             }
         }
-
-        // Load voices when they become available
+        
+        // カテゴリ内のすべての発音を順番に再生
+        function playAll(pronunciations) {
+            let index = 0;
+            
+            function playNext() {
+                if (index >= pronunciations.length) return;
+                
+                speakJapanese(pronunciations[index]);
+                index++;
+                
+                // 1秒間隔で次の発音を再生
+                setTimeout(playNext, 1000);
+            }
+            
+            playNext();
+        }
+        
+        // 音声リストを初期化
         window.speechSynthesis.onvoiceschanged = function() {
             const voices = window.speechSynthesis.getVoices();
-            console.log('Voices loaded:', voices);
+            console.log('利用可能な音声:', voices);
         };
-
-        // Initialize voices (some browsers need this)
+        
+        // ブラウザによっては音声が最初からロードされないため、明示的に取得
         if (window.speechSynthesis.getVoices().length === 0) {
             window.speechSynthesis.addEventListener('voiceschanged', function() {
                 const voices = window.speechSynthesis.getVoices();
-                console.log('Voices loaded after event:', voices);
+                console.log('音声がロードされました:', voices);
             });
         }
-
-        // PWA Service Worker Registration
+        
+        // PWA用サービスワーカー登録
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful');
+                    console.log('サービスワーカー登録成功:', registration.scope);
                 }).catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
+                    console.log('サービスワーカー登録失敗:', err);
                 });
             });
         }
         
-        // PWA Install Prompt
+        // PWAインストールプロンプト
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
