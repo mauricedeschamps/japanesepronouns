@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#dc3545">
+    <meta name="theme-color" content="#bb86fc">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>Japanese Personal Pronoun</title>
+    <title>Japanese Personal Pronouns</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22skyblue%22/><text y=%22.9em%22 font-size=%2290%22>私</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22skyblue%22/><text y=%22.9em%22 font-size=%2290%22>私</text></svg>">
     <link rel="manifest" href="manifest.json">
@@ -15,8 +15,8 @@
         :root {
             --bg-color: #121212;
             --text-color: #e0e0e0;
-            --primary-color: #dc3545;
-            --secondary-color: #6c757d;
+            --primary-color: #bb86fc;
+            --secondary-color: #3700b3;
             --card-bg: #1e1e1e;
             --hover-color: #4a148c;
             --active-color: #7b1fa2;
@@ -97,7 +97,7 @@
             margin-top: 4px;
         }
         
-        .play-all {
+        .sound-button {
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -109,7 +109,7 @@
             transition: opacity 0.2s;
         }
         
-        .play-all:hover {
+        .sound-button:hover {
             opacity: 0.9;
         }
         
@@ -147,7 +147,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>日本語人称代名詞発音ガイド</h1>
+        <h1>Japanese Personal Pronouns</h1>
         
         <!-- 私 / I -->
         <div class="pronoun-card">
@@ -186,7 +186,7 @@
                     <span class="romaji">uchi</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['わたし', 'わたくし', 'ぼく', 'おれ', 'あたし', 'わし', 'われ', 'うち'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['わたし', 'わたくし', 'ぼく', 'おれ', 'あたし', 'わし', 'われ', 'うち'])">sound</button>
         </div>
         
         <!-- あなた / You -->
@@ -226,7 +226,7 @@
                     <span class="romaji">jibun</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['あなた', 'きみ', 'おまえ', 'あんた', 'てめえ', 'きさま', 'おたく', 'じぶん'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['あなた', 'きみ', 'おまえ', 'あんた', 'てめえ', 'きさま', 'おたく', 'じぶん'])">sound</button>
         </div>
         
         <!-- 彼 / He -->
@@ -262,7 +262,7 @@
                     <span class="romaji">yatsu</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['かれ', 'あのひと', 'あのかた', 'こいつ', 'そいつ', 'あいつ', 'やつ'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['かれ', 'あのひと', 'あのかた', 'こいつ', 'そいつ', 'あいつ', 'やつ'])">sound</button>
         </div>
         
         <!-- 彼女 / She -->
@@ -298,7 +298,7 @@
                     <span class="romaji">yatsu</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['かのじょ', 'あのひと', 'あのかた', 'こいつ', 'そいつ', 'あいつ', 'やつ'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['かのじょ', 'あのひと', 'あのかた', 'こいつ', 'そいつ', 'あいつ', 'やつ'])">sound</button>
         </div>
         
         <!-- 私たち / We -->
@@ -334,7 +334,7 @@
                     <span class="romaji">kochira</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['わたしたち', 'われわれ', 'ぼくたち', 'おれたち', 'あたしたち', 'わたくしども', 'こちら'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['わたしたち', 'われわれ', 'ぼくたち', 'おれたち', 'あたしたち', 'わたくしども', 'こちら'])">sound</button>
         </div>
         
         <!-- あなたたち / You (plural) -->
@@ -366,7 +366,7 @@
                     <span class="romaji">otakutachi</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['あなたたち', 'きみたち', 'おまえたち', 'あんたたち', 'あなたがた', 'おたくたち'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['あなたたち', 'きみたち', 'おまえたち', 'あんたたち', 'あなたがた', 'おたくたち'])">sound</button>
         </div>
         
         <!-- 彼ら / They (male) -->
@@ -402,7 +402,7 @@
                     <span class="romaji">yatsura</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['かれら', 'あのひとたち', 'あのかたたち', 'こいつら', 'そいつら', 'あいつら', 'やつら'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['かれら', 'あのひとたち', 'あのかたたち', 'こいつら', 'そいつら', 'あいつら', 'やつら'])">sound</button>
         </div>
         
         <!-- 彼女ら / They (female) -->
@@ -442,7 +442,7 @@
                     <span class="romaji">yatsura</span>
                 </div>
             </div>
-            <button class="play-all" onclick="playAll(['かのじょら', 'かのじょたち', 'あのひとたち', 'あのかたたち', 'こいつら', 'そいつら', 'あいつら', 'やつら'])">全部再生</button>
+            <button class="sound-button" onclick="playAll(['かのじょら', 'かのじょたち', 'あのひとたち', 'あのかたたち', 'こいつら', 'そいつら', 'あいつら', 'やつら'])">sound</button>
         </div>
         
         <footer>
